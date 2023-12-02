@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct jyo
+{
+
+    char abc[4];
+    float xyz;
+};
+int main() {
+    FILE *fp;
+    char sri[20];
+    scanf("%s",sri);
+    fp=fopen(sri,"r");
+    if(fp==NULL)
+    {
+        printf("error\n");
+        return 1;
+    }
+   /*char a,b,k;
+    a=atoi(fgetc(fp));
+    k=fgetc(fp);
+    b=atoi(fgetc(fp));
+    k=fgetc(fp);
+   int j;*/
+   int n,q,j;
+   fscanf(fp,"%d %d\n",&n,&q);
+    struct jyo num[n];
+    for(j=0;j<n;j++)
+    {
+       fscanf(fp,"%s %f\n",num[j].abc,&num[j].xyz);
+    }
+    char u[4]="USD";
+    int i,v;
+    float ans;
+    char initial[4];
+    char final[4];
+    float number;
+    float mul;
+    float divide;
+    for(i=0;i<q;i++)
+    {
+      fscanf(fp,"%f %s %s\n",&number,initial,final);
+      for(v=0;v<n;v++)
+      {
+          if(strcmp(initial,num[v].abc)==0)
+          {
+             mul = num[v].xyz; 
+          }
+           if(strcmp(final,num[v].abc)==0)
+          {
+             divide = num[v].xyz; 
+          }
+          if(strcmp(initial,u)==0)
+          {
+              mul=1;
+          }
+          if(strcmp(final,u)==0)
+          {
+              divide=1;
+          }
+      }
+
+          ans = number * mul/divide;
+          printf("%.2f\n",ans);
+      
+    }
+    fclose(fp);
+return 0;
+}
+
